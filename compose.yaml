@@ -1,0 +1,13 @@
+services:
+  nginx-vpn:
+    build: .
+    container_name: nginx-wireguard-service
+    ports:
+      - "8080:8080/udp"  # WireGuard VPN traffic
+    cap_add:
+      - NET_ADMIN        # Required to modify network interfaces (wg0)
+    devices:
+      - "/dev/net/tun:/dev/net/tun" # Gives container access to the TUN device
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1 # Helps with routing WireGuard traffic
+    restart: unless-stopped
