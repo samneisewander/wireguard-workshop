@@ -7,7 +7,7 @@ target_pub=$(echo ${target_priv} | wg pubkey | tee target.pub)
 # Generate interface portion of the hub's wg0.conf.
 cat <<EOF > wg0.conf
 [Interface]
-Address 192.168.1.0/24
+Address = 192.168.1.0/24
 PrivateKey = ${target_priv}
 ListenPort = 8080
 
