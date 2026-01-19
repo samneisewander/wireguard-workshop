@@ -2,6 +2,9 @@ YELLOW=\033[1;33m
 GREEN=\033[1;32m
 NC=\033[0m # No Color
 
+WIREGUARD_DIR=wireguard
+PRESENTER_DIR=presenter-materials
+
 .PHONY: all configs stack clean
 
 all: configs stack
@@ -12,13 +15,7 @@ configs:
 	./generate_keys_configs.sh
 	@echo "$(GREEN)done.$(NC)"
 
-.image: generate_keys_configs.sh html/* entrypoint.sh Dockerfile
-	@echo "$(YELLOW)Rebuilding image...$(NC)"
-	docker compose build --no-cache nginx-vpn
-	touch .image
-	@echo "$(GREEN)done.$(NC)"
-
-stack: .image
+stack:
 	@echo "$(YELLOW)Deploying docker stack...$(NC)"
 	docker compose up -d  
 	@echo "$(GREEN)done.$(NC)"
@@ -26,8 +23,5 @@ stack: .image
 clean:
 	@echo "$(YELLOW)Cleaning up...$(NC)"
 	docker compose down
-	rm -rf keys
+	rm -rf $(WIREGUARD_DIR) $(PRESENTER_DIR)
 	@echo "$(GREEN)done.$(NC)"
-
-clean-stamps:
-	rm .image
