@@ -13,7 +13,7 @@ An example client configuration is also automatically generated in the `./presen
 The objective for attendees is to set up their laptop or other device as a client to the hub in order to access a "flag", which is hidden in an HTML page served on the hub over the VPN. You may customize the flag by placing custom static HTML pages in the `./html` directory.
  
 ## Prerequisites
-- Install [Docker](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
+- Install [Docker Desktop](https://www.docker.com/) (You may choose to simply install [Docker Engine](https://docs.docker.com/engine/install/) and [Docker Compose](https://docs.docker.com/compose/install/) instead)
 - Install [WireGuard](https://www.wireguard.com/install/)
 - Install [Make](https://www.gnu.org/software/make/)
 
