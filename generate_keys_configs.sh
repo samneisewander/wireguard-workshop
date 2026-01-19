@@ -3,8 +3,8 @@ PRESENTER_DIR=presenter-materials
 LISTENPORT=51820
 
 # Generate public/private key pair for wireguard "hub"
-server_priv_key=$(wg genkey)
-server_pub_key=$(echo ${server_priv_key} | wg pubkey)
+SERVER_PRIV_KEY=$(wg genkey)
+SERVER_PUB_KEY=$(echo ${SERVER_PRIV_KEY} | wg pubkey)
 
 mkdir -p $WIREGUARD_DIR
 mkdir -p $PRESENTER_DIR
@@ -13,7 +13,7 @@ mkdir -p $PRESENTER_DIR
 cat <<EOF > $WIREGUARD_DIR/wg0.conf
 [Interface]
 Address = 10.8.0.0/24
-PrivateKey = ${server_priv_key}
+PrivateKey = ${SERVER_PRIV_KEY}
 ListenPort = ${LISTENPORT}
 
 EOF
@@ -43,7 +43,7 @@ Address = 10.8.0.1/24
 PrivateKey = $(head -n 1 $PRESENTER_DIR/private_keys)
 
 [Peer]
-PublicKey = ${server_pub_key}
+PublicKey = ${SERVER_PUB_KEY}
 Endpoint = 127.0.0.1:${LISTENPORT} # REPLACE WITH SERVER ADDRESS
 AllowedIPs = 10.8.0.0/24
 EOF
