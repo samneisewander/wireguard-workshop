@@ -28,7 +28,18 @@ Run the Makefile:
 make
 ```
 
-For clients to successfully connect, the host machine must allow incoming traffic on port `51820/udp`.
+For clients to successfully connect, the host machine must allow incoming traffic on port `51820/udp`. If this default port is not available, edit the `compose.yaml`:
+```yaml
+# compose.yaml (old)
+ports:
+- 51820:51820/udp
+```
+
+```yaml
+# compose.yaml (new)
+ports:
+- xxxxx:51820/udp
+```
 
 To destroy the containers and delete the generated files, run:
 ```bash
